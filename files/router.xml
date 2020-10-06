@@ -1,0 +1,53 @@
+<engine>
+  <esp-routers>
+    <esp-router name='router'>
+      <esp-engines>
+        <esp-engine name='esp1' host='localhost' port='61003'/>
+        <esp-engine name='esp2' host='localhost' port='61007'/>
+      </esp-engines>
+      <esp-destinations>
+        <publish-destination name='test' opcode='upsert'>
+          <filter-func>
+            lt($number,50)
+          </filter-func>
+          <publish-target>
+            <engine-func>esp2</engine-func>
+            <project-func>destination_project</project-func>
+            <contquery-func>cq1</contquery-func>
+            <window-func>ifNext(lt($number,10),'Source1',and(gte($number,10),lt($number,30)),'Source2',gte($number,30),'Source3')</window-func>
+          </publish-target>
+          <event-fields>
+            <init>
+              <value name='foo'>sum(3,4)</value>
+              <value name='bar'>$foo</value>
+            </init>
+            <fields>
+              <field name='number2'>product($foo,5)</field>
+              <field name='counter'>sum($counter,1)</field>
+              <field name='luck'>concat('My lucky number is ',$foo)</field>
+            </fields>
+          </event-fields>
+        </publish-destination>
+        <writer-destination name='test3' format='json'>
+          <file-func>
+            string('/home/zestem/router/test.json')
+          </file-func>
+        </writer-destination>
+      </esp-destinations>
+      <esp-routes>
+        <esp-route name='test1' to='test' snapshot='true'>
+          <engine-expr>esp1</engine-expr>
+          <project-expr>source_project</project-expr>
+          <contquery-expr>cq1</contquery-expr>
+          <window-expr>Compute1</window-expr>
+        </esp-route>
+        <esp-route name='test2' to='test3'>
+          <engine-expr>esp1</engine-expr>
+          <project-expr>source_project</project-expr>
+          <contquery-expr>cq1</contquery-expr>
+          <window-expr>Compute1</window-expr>
+        </esp-route>
+      </esp-routes>
+    </esp-router>
+  </esp-routers>
+</engine>

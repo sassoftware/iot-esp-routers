@@ -1,0 +1,63 @@
+<project name="source_project" threads="1" pubsub="auto" heartbeat-interval="1">
+  <metadata>
+    <meta id="studioUploadedBy">anonymousUser</meta>
+    <meta id="studioUploaded">1582229636602</meta>
+    <meta id="studioModifiedBy">anonymousUser</meta>
+    <meta id="studioModified">1582389454668</meta>
+    <meta id="layout">{"cq1":{"Compute1":{"x":-345,"y":-190},"Source1":{"x":-345,"y":-320}}}</meta>
+  </metadata>
+  <contqueries>
+    <contquery name="cq1">
+      <windows>
+        <window-source pubsub="true" name="Source1">
+          <schema>
+            <fields>
+              <field name="id" type="double" key="true"/>
+              <field name="name" type="string"/>
+              <field name="number" type="double"/>
+            </fields>
+          </schema>
+          <connectors>
+            <connector class="fs" name="pubConnector">
+              <properties>
+                <property name="type"><![CDATA[pub]]></property>
+                <property name="fsname"><![CDATA[@PROJDIR@/test_data.csv]]></property>
+                <property name="fstype"><![CDATA[csv]]></property>
+              </properties>
+            </connector>
+          </connectors> 
+        </window-source>
+        <window-compute pubsub="true" name="Compute1">
+          <schema>
+            <fields>
+              <field name="id" type="double" key="true"/>
+              <field name="name" type="string"/>
+              <field name="number" type="double"/>
+            </fields>
+          </schema>
+          <output>
+            <field-expr><![CDATA[name]]></field-expr>
+            <field-expr><![CDATA[number]]></field-expr>
+          </output>
+        </window-compute>
+        <window-compute pubsub="true" name="Compute2">
+          <schema>
+            <fields>
+              <field name="id" type="double" key="true"/>
+              <field name="name" type="string"/>
+              <field name="number" type="double"/>
+            </fields>
+          </schema>
+          <output>
+            <field-expr><![CDATA[name]]></field-expr>
+            <field-expr><![CDATA[number]]></field-expr>
+          </output>
+        </window-compute>
+      </windows>
+      <edges>
+        <edge source="Source1" target="Compute1"/>
+        <edge source="Source1" target="Compute2"/>
+      </edges>
+    </contquery>
+  </contqueries>
+</project>

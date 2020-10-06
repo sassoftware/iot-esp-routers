@@ -1,0 +1,122 @@
+<project name="destination_project" threads="1" pubsub="auto" heartbeat-interval="1">
+  <metadata>
+    <meta id="studioUploadedBy">anonymousUser</meta>
+    <meta id="studioUploaded">1582230936321</meta>
+    <meta id="studioModifiedBy">anonymousUser</meta>
+    <meta id="studioModified">1582597829102</meta>
+    <meta id="layout">{"cq1":{"Compute1":{"x":-305,"y":-105},"Compute2":{"x":-40,"y":-105},"Compute3":{"x":225,"y":-105},"Source1":{"x":-305,"y":-215},"Source2":{"x":-40,"y":-215},"Source3":{"x":225,"y":-215}}}</meta>
+  </metadata>
+  <contqueries>
+    <contquery name="cq1">
+      <windows>
+        <window-source pubsub="true" name="Source1">
+          <schema>
+            <fields>
+              <field name="id" type="double" key="true"/>
+              <field name="name" type="string"/>
+              <field name="number" type="double"/>
+              <field name="number2" type="double"/>
+              <field name="count" type="int64"/>
+              <field name="luck" type="string"/>
+            </fields>
+          </schema>
+        </window-source>
+        <window-compute pubsub="true" name="Compute1">
+          <schema>
+            <fields>
+              <field name="id" type="double" key="true"/>
+              <field name="name" type="string"/>
+              <field name="number" type="double"/>
+            </fields>
+          </schema>
+          <output>
+            <field-expr><![CDATA[name]]></field-expr>
+            <field-expr><![CDATA[number]]></field-expr>
+          </output>
+	  <connectors>
+            <connector class="fs" name="subConnector1">
+	       <properties>
+	          <property name="type"><![CDATA[sub]]></property>
+	          <property name="snapshot"><![CDATA[true]]></property>
+	          <property name="fsname"><![CDATA[@PROJDIR@/output1.csv]]></property>
+	          <property name="fstype"><![CDATA[csv]]></property>
+	        </properties>
+	      </connector>
+	  </connectors>
+
+        </window-compute>
+        <window-source pubsub="true" name="Source2">
+          <schema>
+            <fields>
+              <field name="id" type="double" key="true"/>
+              <field name="name" type="string"/>
+              <field name="number" type="double"/>
+              <field name="number2" type="double"/>
+            </fields>
+          </schema>
+        </window-source>
+        <window-compute pubsub="true" name="Compute2">
+          <schema>
+            <fields>
+              <field name="id" type="double" key="true"/>
+              <field name="name" type="string"/>
+              <field name="number" type="double"/>
+            </fields>
+          </schema>
+          <output>
+            <field-expr><![CDATA[name]]></field-expr>
+            <field-expr><![CDATA[number]]></field-expr>
+          </output>
+	  <connectors>
+            <connector class="fs" name="subConnector2">
+	       <properties>
+	          <property name="type"><![CDATA[sub]]></property>
+	          <property name="snapshot"><![CDATA[true]]></property>
+	          <property name="fsname"><![CDATA[@PROJDIR@/output2.csv]]></property>
+	          <property name="fstype"><![CDATA[csv]]></property>
+	        </properties>
+	      </connector>
+	  </connectors>
+        </window-compute>
+        <window-source pubsub="true" name="Source3">
+          <schema>
+            <fields>
+              <field name="id" type="double" key="true"/>
+              <field name="name" type="string"/>
+              <field name="number" type="double"/>
+              <field name="number2" type="double"/>
+            </fields>
+          </schema>
+        </window-source>
+        <window-compute pubsub="true" name="Compute3">
+          <schema>
+            <fields>
+              <field name="id" type="double" key="true"/>
+              <field name="name" type="string"/>
+              <field name="number" type="double"/>
+            </fields>
+          </schema>
+          <output>
+            <field-expr><![CDATA[name]]></field-expr>
+            <field-expr><![CDATA[number]]></field-expr>
+          </output>
+	  <connectors>
+            <connector class="fs" name="subConnector3">
+	       <properties>
+	          <property name="type"><![CDATA[sub]]></property>
+	          <property name="snapshot"><![CDATA[true]]></property>
+	          <property name="fsname"><![CDATA[@PROJDIR@/output3.csv]]></property>
+	          <property name="fstype"><![CDATA[csv]]></property>
+	        </properties>
+	      </connector>
+	  </connectors>
+        </window-compute>
+      </windows>
+      <edges>
+        <edge source="Source1" target="Compute1"/>
+        <edge source="Source2" target="Compute2"/>
+        <edge source="Source3" target="Compute3"/>
+      </edges>
+    </contquery>
+  </contqueries>
+</project>
