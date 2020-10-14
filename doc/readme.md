@@ -1,6 +1,6 @@
 # Running the ESP Routers Project
 
-## Download Files from GitLab
+## Download Files from GitHub
 
 All files required to execute the ESP Router example are available in the [files](files) directory of this page. Download the following files:
 
