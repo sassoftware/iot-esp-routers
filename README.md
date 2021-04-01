@@ -1,5 +1,7 @@
 # ESP Routers
 
+<img src="https://img.shields.io/badge/Category-Streaming%20Data-blue"> <img src="https://img.shields.io/badge/Sub--Category-Routing-yellowgreen"> <img src="https://img.shields.io/badge/Difficulty-Intermediate-yellow"> <img src="https://img.shields.io/badge/Updated-Jun%202020-orange">
+
 This repository contains a description of how ESP Routers work, along with simple examples that can easily be extended to more complex use cases
 
 ## Overview
